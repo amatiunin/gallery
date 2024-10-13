@@ -1,26 +1,89 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container mt-4 w-50">
+    <div class="text-center mt-4">Welcome to gallery</div>
+    <div class="gallery d-flex justify-content-center mt-4">
+      <div class="thumbnail" v-for="(image, index) in images" :key="index">
+        <img
+            :src="image.src"
+            :alt="'Thumbnail ' + index"
+            @click="openLightbox(index)"
+            class="thumbnail-image"
+        />
+      </div>
+
+      <vue-easy-lightbox
+          :visible="visible"
+          :imgs="images.map(image => image.src)"
+          :index="currentIndex"
+          @hide="handleHide"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VueEasyLightbox from 'vue-easy-lightbox'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
+    VueEasyLightbox,
+  },
+  data() {
+    return {
+      visible: false,
+      currentIndex: 0,
+      images: [
+        {
+          src: 'https://unsplash.it/500',
+          caption: 'Image 1',
+        },
+        {
+          src: 'https://unsplash.it/501',
+        },
+        {
+          src: 'https://unsplash.it/502',
+        },
+        {
+          src: 'https://unsplash.it/503',
+        },
+        {
+          src: 'https://unsplash.it/504',
+        },
+        {
+          src: 'https://unsplash.it/505',
+        },
+      ],
+    }
+  },
+  methods: {
+    openLightbox(index) {
+      this.currentIndex = index
+      this.visible = true
+    },
+    handleHide() {
+      this.visible = false
+    },
+  },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  object-fit: cover;
 }
 </style>

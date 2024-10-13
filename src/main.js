@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import VueEasyLightbox from 'vue-easy-lightbox'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(VueEasyLightbox)
+app.mount('#app')
