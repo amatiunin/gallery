@@ -1,89 +1,16 @@
 <template>
-  <div class="container mt-4 w-50">
-    <div class="text-center mt-4">Welcome to gallery</div>
-    <div class="gallery d-flex justify-content-center mt-4">
-      <div class="thumbnail" v-for="(image, index) in images" :key="index">
-        <img
-            :src="image.src"
-            :alt="'Thumbnail ' + index"
-            @click="openLightbox(index)"
-            class="thumbnail-image"
-        />
-      </div>
-
-      <vue-easy-lightbox
-          :visible="visible"
-          :imgs="images.map(image => image.src)"
-          :index="currentIndex"
-          @hide="handleHide"
-      />
-    </div>
+  <div id="app">
+    <GalleryComponent />
   </div>
 </template>
 
 <script>
-import VueEasyLightbox from 'vue-easy-lightbox'
+import GalleryComponent from './components/GalleryComponent.vue'
+import './assets/styles/gallery.css'
 
 export default {
   components: {
-    VueEasyLightbox,
-  },
-  data() {
-    return {
-      visible: false,
-      currentIndex: 0,
-      images: [
-        {
-          src: 'https://unsplash.it/500',
-          caption: 'Image 1',
-        },
-        {
-          src: 'https://unsplash.it/501',
-        },
-        {
-          src: 'https://unsplash.it/502',
-        },
-        {
-          src: 'https://unsplash.it/503',
-        },
-        {
-          src: 'https://unsplash.it/504',
-        },
-        {
-          src: 'https://unsplash.it/505',
-        },
-      ],
-    }
-  },
-  methods: {
-    openLightbox(index) {
-      this.currentIndex = index
-      this.visible = true
-    },
-    handleHide() {
-      this.visible = false
-    },
+    GalleryComponent,
   },
 }
 </script>
-
-<style>
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.thumbnail {
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-}
-
-.thumbnail-image {
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-  object-fit: cover;
-}
-</style>
