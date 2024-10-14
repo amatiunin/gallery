@@ -23,6 +23,7 @@
 
 <script>
 import VueEasyLightbox from 'vue-easy-lightbox'
+import './assets/styles/gallery.css'
 
 export default {
   components: {
@@ -66,24 +67,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.thumbnail {
-  width: 150px;
-  height: 150px;
-  overflow: hidden;
-}
-
-.thumbnail-image {
-  width: 100%;
-  height: auto;
-  cursor: pointer;
-  object-fit: cover;
-}
-</style>
